@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Commission Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+        .report {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; }
+    </style>
+
+
+</head>
+
+
+
+
+<body>
+
+
+
+
+<script>
+    let subtotal = 0;
+    let input;
+
+    // LOOP
+    do {
+        input = prompt("Enter the dollar and cents value of a single sale or type Done to quit:");
+
+        if (input !== null && input.toLowerCase() !== "done") {
+            let amount = parseFloat(input);
+
+            if (!isNaN(amount) && amount > 0) {
+                subtotal += amount;
+            }
+        }
+
+    } while (input !== null && input.toLowerCase() !== "done");
+
+    // DETERMINE COMMISSION RATE
+    let rate = 0;
+
+    if (subtotal <= 0) {
+        rate = 0;
+    } else if (subtotal < 500) {
+        rate = 0.05;
+    } else if (subtotal < 1000) {
+        rate = 0.10;
+    } else {
+        rate = 0.15;
+    }
+
+    // CALCULATIONS
+    let commission = subtotal * rate;
+    let earnings = subtotal + commission;
+
+    // FORMATTING
+    let subtotalFmt = "$" + subtotal.toFixed(2);
+    let rateFmt = (rate * 100).toFixed(2) + "%";
+    let commissionFmt = "$" + commission.toFixed(2);
+    let earningsFmt = "$" + earnings.toFixed(2);
+
+    // ONE OUTPUT STATEMENT
+    document.write(`
+        <div class="report">
+
+            <h1>Hello <username>, Here is your Weekly Commission Report.</h1>
+
+            <p>Your sales total is ${subtotalFmt}, so your commission rate is ${rateFmt}</p>
+            <p>Your total commission is ${commissionFmt}</p>
+            <p>Your total earnings are ${earningsFmt}</p>
+
+        </div>`);
+</script>
+
+
+
+
+
+</body>
+</html>
